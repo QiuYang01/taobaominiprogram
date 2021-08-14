@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/logs/main",
+    "pages/detail/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#214592",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999",
+    "backgroundColor": "#fafafa",
+    "selectedColor": "#333",
+    "borderStyle": "white",
+    "list": [{
+      "text": "",
+      "pagePath": "pages/index/main",
+      "iconPath": "static/tabs/home.png",
+      "selectedIconPath": "static/tabs/home-active.png"
+    }, {
+      "text": "导航",
+      "pagePath": "pages/logs/main",
+      "iconPath": "static/tabs/orders.png",
+      "selectedIconPath": "static/tabs/orders-active.png"
+    }],
+    "position": "bottom"
+  },
+  "usingComponents": {
+    "van-button": "/static/vant-weapp/button/index",
+    "van-loading": "/static/vant-weapp/loading/index",
+    "van-field": "/static/vant-weapp/field/index",
+    "van-toast": "/static/vant-weapp/toast/index",
+    "van-popup": "/static/vant-weapp/popup/index",
+    "van-switch": "/static/vant-weapp/switch/index",
+    "van-image": "/static/vant-weapp/image/index",
+    "van-search": "/static/vant-weapp/search/index",
+    "van-transition": "/static/vant-weapp/transition/index",
+    "van-nav-bar": "/static/vant-weapp/nav-bar/index",
+    "van-submit-bar": "/static/vant-weapp/submit-bar/index",
+    "van-goods-action": "/static/vant-weapp/goods-action/index",
+    "van-goods-action-icon": "/static/vant-weapp/goods-action-icon/index",
+    "van-goods-action-button": "/static/vant-weapp/goods-action-button/index",
+    "van-share-sheet": "/static/vant-weapp/share-sheet/index",
+    "van-cell": "/static/vant-weapp/cell/index",
+    "van-cell-group": "/static/vant-weapp/cell-group/index",
+    "van-empty": "/static/vant-weapp/empty/index"
+  }
+}
