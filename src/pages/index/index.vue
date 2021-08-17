@@ -1,11 +1,20 @@
 <template>
   <div @touchstart='touchStart' @touchmove='touchMove' @touchend='touchEnd'>
+    <van-dialog
+      use-slot
+      title="说明"
+      :show="showtipdialog"
+    >
+      <div style="padding:20px 10px">
+        <p v-html="initdata.contextBrief"></p>
+      </div>
+    </van-dialog>
     <div v-if="dsb">
       <calc></calc>
     </div>
     <div v-else>
       <van-toast id="van-toast" />
-      <van-transition duration="300" :show="showSearch&&!drawer&&dsb" name="fade">
+      <van-transition duration="300" :show="showSearch&&!drawer&&!dsb" name="fade">
         <div class="search-head">
           <!-- <header class="typing" align="center">请输入商品名称进行搜索</header> -->
           <van-search background="#214592"  use-action-slot v-model="searchWords" placeholder="请输入您需要的商品" @change="search" clearable @search="search" >
@@ -16,16 +25,16 @@
       <div class="goodContainer">
         <van-card v-for="good in goodsList" 
           :key="good.item_id" 
-          style="display: flex;margin: 10px 5px;padding:5px 3px;"
+          style="display: flex;margin: 10px 5px;padding:5px 3px;width:100%"
           :thumb="good.white_image"
           :id="good.item_id" >
           <div class="gooodleft"> 
-            <van-image radius="10"  v-if="good.white_image" :src='good.white_image' width="100" height="90" @click="previewImage(good.white_image,good.small_images)"></van-image>
-            <van-image  radius="10" v-else :src="good.small_images?good.small_images.string[0]:''" width="100" height="90" @click="previewImage(good.small_images.string[0],good.small_images)"></van-image>
-            <!-- <van-image  :src="good.small_images?good.small_images.string[1]:''" width="100" height="80" @click="previewImage"></van-image> -->
-            <!-- <span class="itemdesc ">总量/剩余 {{good.coupon_total_count}}/{{good.coupon_remain_count}}</span> -->
-            <span class="itemdesc" style="font-weight:600;font-size:0.7em;font-weight:200">【{{good.shop_title}}】</span>
-        </div>
+              <van-image radius="10"  v-if="good.white_image" :src='good.white_image' width="100" height="90" @click="previewImage(good.white_image,good.small_images)"></van-image>
+              <van-image  radius="10" v-else :src="good.small_images?good.small_images.string[0]:''" width="100" height="90" @click="previewImage(good.small_images.string[0],good.small_images)"></van-image>
+              <!-- <van-image  :src="good.small_images?good.small_images.string[1]:''" width="100" height="80" @click="previewImage"></van-image> -->
+              <!-- <span class="itemdesc ">总量/剩余 {{good.coupon_total_count}}/{{good.coupon_remain_count}}</span> -->
+              <span class="itemdesc" style="font-weight:600;font-size:0.7em;font-weight:200">【{{good.shop_title}}】</span>
+          </div>
           <div class="goodright">
             <span @click="linktodetail(good)" style="text-decoration:underline;color:#358CD6;font-weight:600;font-size:1.1em">{{good.short_title}}</span>
             <div class="bottom clearfix">
@@ -34,9 +43,9 @@
                 <span class="small_border">{{good.provcity}}</span>
                 <span class="small_border ">30天卖{{good.volume}}</span>
                 <span style="border:1px solid #007ACC" v-if="good.coupon_share_url" class="small_border ">有隐藏优惠券</span>
-              </div>
+              </div> 
               <span class="itemdesc cur_price">￥{{good.zk_final_price}}  <b v-if="good.coupon_amount" class="coupon">{{good.coupon_amount}}元券</b></span>
-              <van-button type="primary" round  plain hairline  size="small" @click="addToCompareList(good)">加对比</van-button>
+              <!-- <van-button type="primary" round  plain hairline  size="small" @click="addToCompareList(good)">加对比</van-button> -->
               &nbsp;
               &nbsp;
               <van-button style="float:right" type="info" round    size="small"  @click="spreadGet(good)">复制链接</van-button>
@@ -46,13 +55,13 @@
       </div>
 
       <!-- 对比的按钮 -->
-      <div class="cart-container" v-if="dsb" @click="showcompareTableDialog=true" v-show="!showcompareTableDialog">
+      <!-- <div class="cart-container" v-if="!dsb" @click="showcompareTableDialog=true" v-show="!showcompareTableDialog">
         <div class="num">{{compareList.length}}对比</div>
         <div class="circle"></div>
-      </div>
+      </div> -->
 
       <!-- 下一页 -->
-      <div class="change_page_container">
+      <div class="change_page_container"> 
         <!-- <el-select v-model="pageSize" placeholder="请选择" @change="changepagesize" style="width:110px">
           <el-option
             v-for="item in pageoptions"
@@ -147,6 +156,7 @@
 import "./index.css"
 import store from "./store"
 import calc from "./calcurate"
+import util from "../../utils/index"
 export default {
   components:{calc},
    data () {
@@ -200,15 +210,33 @@ export default {
       touchE:[],
       //控制是否显示搜索框
       showSearch:true,
-      initdata:[],
+      initdata:{},
+      showtipdialog:false,
     }
   },
-  mounted() {
+  created() {
     this.getinitdata();
     // this.search();
-    console.log("store",store)
+    console.log("store",store);
+    wx.showShareMenu({ menus: ['shareAppMessage', 'shareTimeline'] })
   },
   methods: {
+    
+
+    
+    onShareAppMessage() {
+        return {
+            title: '好物分享，快来看看吧',
+            path: '/pages/index/main'
+        }
+    },
+    onShareTimeline() {
+        return {
+            title: '好物分享，快来看看吧',
+            query: '', // 自定义页面路径中携带的参数，如 path?a=1&b=2 的 “?” 后面部分
+            imageUrl: 'https://wx.qlogo.cn/mmhead/Q3auHgzwzM7tjTcfWZQYDdUT5OjKuC2wueeuNaJhNo0icl61EjIMM5Q/0' // 自定义图片路径，显示图片长宽比是 1:1，默认使用小程序 Logo
+        }
+    },
     initpage(){
       //设置title
       wx.setNavigationBarTitle({
@@ -225,15 +253,17 @@ export default {
       .then(res =>{
         console.log(res);
         this.initdata = res.data.data;
-        if(res.data.data.userName==="dog"){
-          this,this.initpage();
+        if(res.data.data.userName!="dog"){
+          this.initpage();
         }else{
-          this,this.initpage();
+          this.initpage();
+          this.showtipdialog = true;
           this.dsb = false;
           this.search();
-        }
-      })
-    },
+
+        } 
+      }) 
+    }, 
     //跳转到商品详细界面
     linktodetail(goods){
       // console.log(encodeURIComponent(JSON.stringify(goods)))
@@ -437,7 +467,7 @@ export default {
           if(res.data.data.indexOf("error_response")!=-1){
             this.errMsg("生成口令失败，系统异常！")
           }else{
-            this.$Toast.success("复制商品链接成功，打开淘宝即可领券购买。");
+            this.$Toast.success("复制商品链接成功，打开淘宝即可领券购买。",9000);
             console.log("复制的链接",JSON.parse(res.data.data).tbk_tpwd_create_response.data.model);
             this.setClipboardData(JSON.parse(res.data.data).tbk_tpwd_create_response.data.model)
             // this.copyToClipboard(JSON.parse(res.data.data).tbk_tpwd_create_response.data.model);

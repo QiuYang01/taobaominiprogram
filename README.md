@@ -1,4 +1,7 @@
-# taobaominiprogram
+
+
+
+<!-- # taobaominiprogram
 
 > A Mpvue project
 
@@ -34,4 +37,4 @@ npm build:my
 npm run build --report
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader). -->

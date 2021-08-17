@@ -1,6 +1,6 @@
 //定义请求地址
-// const host = 'https://www.hhdglm.com/api/';
-const host = 'http://192.168.0.176:6070/';
+const host = 'https://www.hhdglm.com/api/';
+// const host = 'http://127.0.0.1:6070/';
 
 const request = (url, options) => {
   return new Promise((resolve, reject) => {
@@ -8,7 +8,7 @@ const request = (url, options) => {
           url: `${host}${url}`,
           method: options.method,
           data: options.method === 'GET' ? options.data : JSON.stringify(options.data),
-          header: {
+          header: { 
               'Content-Type': 'application/json; charset=UTF-8',
               // 'x-token': 'x-token'  // 看自己是否需要
           },
@@ -17,12 +17,12 @@ const request = (url, options) => {
                   resolve(request)
               } else {
                   reject(request.data)
-              }
+              } 
           },
           fail(error) {
               reject(error.data)
           }
-      })
+    })
   })
 }
 

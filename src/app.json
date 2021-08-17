@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/index/main",
+    "pages/customerservice/main",
+    "pages/customerservicedetail/main",
     "pages/logs/main",
     "pages/detail/main"
   ],
@@ -21,8 +23,8 @@
       "iconPath": "static/tabs/home.png",
       "selectedIconPath": "static/tabs/home-active.png"
     }, {
-      "text": "导航",
-      "pagePath": "pages/logs/main",
+      "text": "客服",
+      "pagePath": "pages/customerservice/main",
       "iconPath": "static/tabs/orders.png",
       "selectedIconPath": "static/tabs/orders-active.png"
     }],
@@ -46,6 +48,7 @@
     "van-share-sheet": "/static/vant-weapp/share-sheet/index",
     "van-cell": "/static/vant-weapp/cell/index",
     "van-cell-group": "/static/vant-weapp/cell-group/index",
-    "van-empty": "/static/vant-weapp/empty/index"
+    "van-empty": "/static/vant-weapp/empty/index",
+    "van-dialog": "/static/vant-weapp/dialog/index"
   }
 }

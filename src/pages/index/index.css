@@ -64,7 +64,8 @@
   padding: 5px;
 }
 .goodleft {
-  max-width:100px;
+  max-width:120px;
+  width: 30%;
 }
 .gooodleft img{
   /* transform:scale(2,2); */
@@ -72,6 +73,7 @@
 }
 
 .goodright {
+  width: 70%;
   padding: 14px;
   overflow-x: hidden;
   padding-left: 15px;

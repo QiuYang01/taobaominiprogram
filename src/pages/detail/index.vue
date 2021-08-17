@@ -23,18 +23,23 @@
       <span style="float:right">{{goods.volume}}:销量</span>
     </div> -->
     
-    <p>{{goods.tk_total_sales}}</p>
+    <!-- <p>{{goods.tk_total_sales}}</p> -->
     <p></p>
 
     <!-- 底部一行 -->
     <van-goods-action >
-      <van-goods-action-icon icon="chat-o" text="客服" />
+      <van-goods-action-icon icon="chat-o" text="客服" @click="topcustomerservice" />
       <!-- <van-goods-action-icon icon="cart-o" text="购物车" info="5" />
       <van-goods-action-icon icon="shop-o" text="店铺" /> -->
       <van-goods-action-button color="#be99ff" text="好物分享" @click="showShare=true" type="warning" />
       <van-goods-action-button color="#7232dd" text="复制链接" @click="spreadGet" />
     </van-goods-action>
-
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <!-- 分享 -->
     <van-share-sheet
       :show="showShare"
@@ -74,6 +79,12 @@ export default {
     })
   },
   methods: {
+    //去客服
+    topcustomerservice(){
+      wx.navigateTo({ //跳转到客服
+        url: "/pages/customerservicedetail/main"
+      })
+    },
     backtopage(){
       console.log("返回")
     },
