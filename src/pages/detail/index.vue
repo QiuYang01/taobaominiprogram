@@ -1,7 +1,7 @@
 <template>
   <div style="height:100vh;background:#F7F8FA">
     <!-- https://vant-contrib.gitee.io/vant-weapp/#/nav-bar#dai-ma-yan-shi -->
-    <van-image fit="none" :src="goods.pict_url" width="500" height="300" @click="previewImage()"></van-image>
+    <van-image fit="none" :src="goods.pict_url" width="400" height="300" @click="previewImage()"></van-image>
     <div class="shop_title">
       <div>{{goods.shop_title}}  <span style="padding-left:10px">{{goods.coupon_info}}</span></div>
     </div>

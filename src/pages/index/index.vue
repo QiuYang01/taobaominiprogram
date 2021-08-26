@@ -4,6 +4,7 @@
       use-slot
       title="说明"
       :show="showtipdialog"
+      @close="onClosedialog"
     >
       <div style="padding:20px 10px">
         <p v-html="initdata.contextBrief"></p>
@@ -12,12 +13,12 @@
     <div v-if="dsb">
       <calc></calc>
     </div>
-    <div v-else>
+    <div v-else> 
       <van-toast id="van-toast" />
       <van-transition duration="300" :show="showSearch&&!drawer&&!dsb" name="fade">
         <div class="search-head">
           <!-- <header class="typing" align="center">请输入商品名称进行搜索</header> -->
-          <van-search background="#214592"  use-action-slot v-model="searchWords" placeholder="请输入您需要的商品" @change="search" clearable @search="search" >
+          <van-search background="#214592"  use-action-slot v-model="searchWords" placeholder="请输入您需要的商品"  clearable @search="search" >
           <van-button custom-style="height:33px" @click="drawer = true" slot="action" size="small"  icon="wap-nav"></van-button>
           </van-search>
         </div>
@@ -44,7 +45,7 @@
                 <span class="small_border ">30天卖{{good.volume}}</span>
                 <span style="border:1px solid #007ACC" v-if="good.coupon_share_url" class="small_border ">有隐藏优惠券</span>
               </div> 
-              <span class="itemdesc cur_price">￥{{good.zk_final_price}}  <b v-if="good.coupon_amount" class="coupon">{{good.coupon_amount}}元券</b></span>
+              <span class="itemdesc cur_price">￥{{(good.zk_final_price-good.coupon_amount)}} <b v-if="good.coupon_amount" class="coupon">{{good.coupon_amount}}元券</b></span>
               <!-- <van-button type="primary" round  plain hairline  size="small" @click="addToCompareList(good)">加对比</van-button> -->
               &nbsp;
               &nbsp;
@@ -72,7 +73,7 @@
         </el-select> -->
         <!-- <van-button type="primary" @click="changePage(-1)" :disabled="currentPage<=1" icon="el-icon-arrow-left">上一页</van-button>
         <van-button type="primary" @click="changePage(1)">下一页<i class="el-icon-arrow-right el-icon--right"></i></van-button> -->
-        <p ref="getmore" v-if="dsb" style="text-align:center;font: font-size:0.8em;color:#338FFF" @click="changePage(1)">点击加载更多...</p>
+        <p ref="getmore" v-if="!dsb" style="text-align:center;font: font-size:0.8em;color:#338FFF" @click="changePage(1)">点击加载更多...</p>
       </div>
 
       <!-- 筛选的滑出框 -->
@@ -165,7 +166,7 @@ export default {
       checked: true,
       drawer:false, //控制右边弹出的弹框
       name:"sdfs",
-      searchWords:'键盘', //搜索的关键字
+      searchWords:'洗发水', //搜索的关键字
       isOverseas:false, //搜索条件 是否海外商品
       isTmall:false, //搜索条件 是否天猫商品
       needFreeShipment:false, //搜索条件 是否包邮
@@ -182,7 +183,7 @@ export default {
 
       //分页用
       currentPage: 1, // 当前页码
-      pageSize: 30, // 每页的数据条数
+      pageSize: 40, // 每页的数据条数
       pageoptions:[
         {
           value:10,
@@ -221,8 +222,9 @@ export default {
     wx.showShareMenu({ menus: ['shareAppMessage', 'shareTimeline'] })
   },
   methods: {
-    
-
+    onClosedialog(){
+      this.showtipdialog = false;
+    },
     
     onShareAppMessage() {
         return {
