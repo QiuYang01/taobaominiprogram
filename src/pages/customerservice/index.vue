@@ -1,6 +1,8 @@
 <template>
+<!-- 在线客服 -->
   <div>
-    在线客服 拥有音乐、闲聊、百科等功能。
+    <movice></movice>
+    在线客服 拥有音乐、闲聊、百科等功能1。
     <!-- {{communicateList}} -->
     <div class="dialogue">
       <div class="dialogue-item" v-for="item in communicateList" :key="item" >
@@ -28,7 +30,9 @@
   </div>
 </template>
 <script>
+import movice from "../movice/index.vue"
 export default {
+  comments:{movice},
   data() {
     return {
        weixinAI: 'https://openai.weixin.qq.com/openapi', // 微信机器人 https://developers.weixin.qq.com/doc/aispeech/platform/INTERFACEDOCUMENT.html

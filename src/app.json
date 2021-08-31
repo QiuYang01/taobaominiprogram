@@ -21,12 +21,12 @@
       "text": "",
       "pagePath": "pages/index/main",
       "iconPath": "static/tabs/home.png",
-      "selectedIconPath": "static/tabs/home-active.png"
+      "selectedIconPath": "static/tabs/shoppingbag.png"
     }, {
-      "text": "客服",
+      "text": "电影",
       "pagePath": "pages/customerservice/main",
       "iconPath": "static/tabs/orders.png",
-      "selectedIconPath": "static/tabs/orders-active.png"
+      "selectedIconPath": "static/tabs/movie.png"
     }],
     "position": "bottom"
   },

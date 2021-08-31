@@ -12,10 +12,10 @@ const request = (url, options) => {
               'Content-Type': 'application/json; charset=UTF-8',
               // 'x-token': 'x-token'  // 看自己是否需要
           },
-          success(request) {
+          success(request) { 
               if (request.data.code === 200) {
                   resolve(request)
-              } else {
+              } else { 
                   reject(request.data)
               } 
           },
